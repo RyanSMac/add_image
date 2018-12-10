@@ -1,0 +1,44 @@
+    Dim clLeft As Double
+    Dim clTop As Double
+    Dim c2Width As Double
+    Dim c2Height As Double
+    
+    Dim cl As Range
+    Dim c2 As Range
+    Dim shpOval As Shape
+    Dim tmpID As Shape
+    
+Sub Range_A1_D6()
+
+    Range("A1:D6").Select
+    
+End Sub
+
+Sub Create_Shape()
+    
+    Set cl = Range("A1")  '<-- Range("C2")
+    Set c2 = Range("A1:D4")
+    
+    clLeft = cl.Left
+    clTop = cl.Top
+    c2Height = c2.Height
+    c2Width = c2.Width
+    
+    Set shpOval = ActiveSheet.Shapes.AddShape(msoShapeRectangle, clLeft, clTop, c2Width, c2Height)
+    
+End Sub
+
+Sub Clear_Cells()
+    
+    Dim shpShape As Shape
+    Dim shpRow As Long
+    Dim shpCol As Long
+    For Each shpShape In ActiveSheet.Shapes
+        shpRow = shpShape.TopLeftCell.Row
+        shpCol = shpShape.TopLeftCell.Column
+        If shpCol = 1 Then
+            shpShape.Delete
+        End If
+        Next
+        
+End Sub
